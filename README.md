@@ -1,6 +1,7 @@
-# Api python with DJANGO REST FRAMEWORK
+# Api python with Django Rest Framework
 
-# install DJANGO
+
+# install django
 `pip install django`
 
 # Create Project
