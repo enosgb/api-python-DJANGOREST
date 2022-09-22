@@ -1,10 +1,10 @@
 # Api python with DJANGO REST FRAMEWORK
 
 # install DJANGO
-pip install django
+`pip install django`
 
 # Create Project
-django-admin startproject setup .
+`django-admin startproject setup`
 
 
 # settings.py
@@ -14,12 +14,12 @@ TIME_ZONE = 'America/Sao_Paulo'
 
 
 # django rest install
-pip install djangorestframework
+`pip install djangorestframework`
 
-pip install markdown   
+`pip install markdown`
 
 # create App
-python manage.py startapp <project name>
+`python manage.py startapp <project name>`
 
 
 # setting database MYSQL example:
