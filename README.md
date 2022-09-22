@@ -18,3 +18,5 @@ pip install djangorestframework
 
 pip install markdown   
 
+# create App
+python manage.py startapp <project name>
