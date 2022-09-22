@@ -37,7 +37,7 @@ DATABASES = {
     
 }
 
-# generate class model already existing database
+# Generate class model already existing database
 
 `python manage.py inspectdb > models.py`
 
