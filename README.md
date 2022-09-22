@@ -20,3 +20,24 @@ pip install markdown
 
 # create App
 python manage.py startapp <project name>
+
+
+# setting database MYSQL example:
+DATABASES = {
+
+    'default': {
+    
+        'ENGINE': 'django.db.backends.mysql',
+        
+        'NAME': 'produtosdb',
+        
+        'USER': 'root',
+        
+        'HOST': 'localhost',
+        'PORT': 3306,
+        
+        'PASSWORD': '687412',
+        
+    }
+    
+}
