@@ -1,4 +1,4 @@
-# This is a simple API PYTHON with DJANGO REST FRAMEWORK
+# API PYTHON with DJANGO REST FRAMEWORK
 
 # install DJANGO
 pip install django
