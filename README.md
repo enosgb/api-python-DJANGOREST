@@ -9,6 +9,7 @@ django-admin startproject setup .
 
 # settings.py
 LANGUAGE_CODE = 'pt-br'
+
 TIME_ZONE = 'America/Sao_Paulo'
 
 
