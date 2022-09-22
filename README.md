@@ -15,5 +15,6 @@ TIME_ZONE = 'America/Sao_Paulo'
 
 # django rest install
 pip install djangorestframework
+
 pip install markdown   
 
