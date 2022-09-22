@@ -38,8 +38,6 @@ DATABASES = {
 
 # generate class model already existing database
 
-comand = {
+`python manage.py inspectdb > models.py`
 
-python manage.py inspectdb > models.py
 
-}
