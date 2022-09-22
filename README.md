@@ -24,6 +24,7 @@ python manage.py startapp <project name>
 
 # setting database MYSQL example:
 DATABASES = {
+    
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'produtosdb',
@@ -32,4 +33,5 @@ DATABASES = {
         'PORT': 3306,
         'PASSWORD': 'you password',      
     } 
+    
 }
