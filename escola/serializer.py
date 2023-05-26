@@ -13,11 +13,21 @@ class CursoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Curso
         fields = '__all__'
+    def to_representation(self, instance):    
+        rep = super(CursoSerializer, self).to_representation(instance)        
+        rep['nivel'] = instance.get_nivel_display()  
+        return rep
 
 class MatriculaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Matricula
-        exclude = []
+        fields = "__all__"
+    def to_representation(self, instance):    
+        rep = super(MatriculaSerializer, self).to_representation(instance)        
+        rep['curso'] = instance.curso.descricao
+        rep['aluno'] = instance.aluno.nome    
+        rep["periodo"] = instance.get_periodo_display()  
+        return rep
 
 class ListaMatriculasAlunoSerializer(serializers.ModelSerializer):
     curso = serializers.ReadOnlyField(source='curso.descricao')
