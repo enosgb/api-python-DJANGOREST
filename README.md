@@ -22,7 +22,7 @@ pip install markdown
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Django corsheaders.
 ```bash
-pip install corsheaders
+pip install django-cors-headers
 ```
 
 
