@@ -31,7 +31,7 @@ git clone https://github.com/enosgb/api-python-DJANGOREST
 Enter the folder project.
 
 ```python
-cd escola
+cd api-python-DJANGOREST
 ```
 Start project.
 
