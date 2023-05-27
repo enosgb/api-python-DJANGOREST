@@ -7,7 +7,7 @@ from escola.models import Aluno,Curso,Matricula
 class AlunoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Aluno
-        fields = ['id','nome','rg','cpf','data_nascimento']
+        fields = ['id','nome','rg','cpf','data_nascimento']    
 
 class CursoSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,7 +15,7 @@ class CursoSerializer(serializers.ModelSerializer):
         fields = '__all__'
     def to_representation(self, instance):    
         rep = super(CursoSerializer, self).to_representation(instance)        
-        rep['nivel'] = instance.get_nivel_display()  
+        rep['nivel_name'] = instance.get_nivel_display()  
         return rep
 
 class MatriculaSerializer(serializers.ModelSerializer):
@@ -24,9 +24,9 @@ class MatriculaSerializer(serializers.ModelSerializer):
         fields = "__all__"
     def to_representation(self, instance):    
         rep = super(MatriculaSerializer, self).to_representation(instance)        
-        rep['curso'] = instance.curso.descricao
-        rep['aluno'] = instance.aluno.nome    
-        rep["periodo"] = instance.get_periodo_display()  
+        rep['curso_nome'] = instance.curso.descricao
+        rep['aluno_nome'] = instance.aluno.nome    
+        rep["periodo_nome"] = instance.get_periodo_display()  
         return rep
 
 class ListaMatriculasAlunoSerializer(serializers.ModelSerializer):
@@ -43,3 +43,13 @@ class ListaAlunosMatriculadosSerializer(serializers.ModelSerializer):
     class Meta:
         model = Matricula
         fields = ['aluno_nome']
+
+
+class ListCourseLevelsSerializer(serializers.Serializer):
+    value = serializers.CharField()
+    option = serializers.CharField()
+
+class ListRegistrationPeriodSerializer(serializers.Serializer):
+    value = serializers.CharField()
+    option = serializers.CharField()
+
