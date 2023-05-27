@@ -20,6 +20,11 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Django 
 pip install markdown
 ```
 
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Django corsheaders.
+```bash
+pip install django-cors-headers
+```
+
 
 ## Clone and Run
 
@@ -31,7 +36,7 @@ git clone https://github.com/enosgb/api-python-DJANGOREST
 Enter the folder project.
 
 ```python
-cd escola
+cd api-python-DJANGOREST
 ```
 Start project.
 
