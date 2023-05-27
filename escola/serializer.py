@@ -1,6 +1,3 @@
-from calendar import c
-from dataclasses import field
-from pyexpat import model
 from rest_framework import serializers
 from escola.models import Student,Course,Registration
 
