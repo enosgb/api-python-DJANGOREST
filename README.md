@@ -2,7 +2,7 @@
 
 Api to managing students in a school
 
-## Installation
+## Installing dependencies
 
 Use the package manager [pip](https://pip.pypa.io/en/stable/) to install django.
 
