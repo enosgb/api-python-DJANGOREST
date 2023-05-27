@@ -2,47 +2,49 @@ from calendar import c
 from dataclasses import field
 from pyexpat import model
 from rest_framework import serializers
-from escola.models import Aluno,Curso,Matricula
+from escola.models import Student,Course,Registration
 
-class AlunoSerializer(serializers.ModelSerializer):
+class StudentSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Aluno
-        fields = ['id','nome','rg','cpf','data_nascimento']    
+        model = Student
+        fields = ['id','name','rg','cpf','birth_date']    
 
-class CursoSerializer(serializers.ModelSerializer):
+class CourseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Curso
+        model = Course
         fields = '__all__'
     def to_representation(self, instance):    
-        rep = super(CursoSerializer, self).to_representation(instance)        
-        rep['nivel_name'] = instance.get_nivel_display()  
+        rep = super(CourseSerializer, self).to_representation(instance)        
+        rep['level_name'] = instance.get_level_display()        
         return rep
+    
 
-class MatriculaSerializer(serializers.ModelSerializer):
+class RegistrationSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Matricula
+        model = Registration
         fields = "__all__"
     def to_representation(self, instance):    
-        rep = super(MatriculaSerializer, self).to_representation(instance)        
-        rep['curso_nome'] = instance.curso.descricao
-        rep['aluno_nome'] = instance.aluno.nome    
-        rep["periodo_nome"] = instance.get_periodo_display()  
+        rep = super(RegistrationSerializer, self).to_representation(instance)        
+        rep['course_name'] = instance.course.description
+        rep['student_name'] = instance.student.name   
+        rep["period_name"] = instance.get_period_display()  
         return rep
+   
 
-class ListaMatriculasAlunoSerializer(serializers.ModelSerializer):
-    curso = serializers.ReadOnlyField(source='curso.descricao')
-    periodo = serializers.SerializerMethodField()
+class ListRegistrationStudentsSerializer(serializers.ModelSerializer):
+    course = serializers.ReadOnlyField(source='course.description')
+    period = serializers.SerializerMethodField()
     class Meta:
-        model = Matricula
-        fields = ['curso', 'periodo']
-    def get_periodo(self,obj):
+        model = Registration
+        fields = ['course', 'period']
+    def get_period(self,obj):
         return obj.get_periodo_display()
 
-class ListaAlunosMatriculadosSerializer(serializers.ModelSerializer):
-    aluno_nome = serializers.ReadOnlyField(source='aluno.nome')
+class ListaRegistrationsStudentsSerializer(serializers.ModelSerializer):
+    student_name = serializers.ReadOnlyField(source='student.name')
     class Meta:
-        model = Matricula
-        fields = ['aluno_nome']
+        model = Registration
+        fields = ['student_name']
 
 
 class ListCourseLevelsSerializer(serializers.Serializer):

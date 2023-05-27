@@ -1,66 +1,66 @@
 from django.shortcuts import get_object_or_404
 from rest_framework import viewsets, generics,filters,views
-from escola.models import Aluno, Curso, Matricula
-from escola.serializer import AlunoSerializer, CursoSerializer, MatriculaSerializer, ListaMatriculasAlunoSerializer, ListaAlunosMatriculadosSerializer,ListCourseLevelsSerializer,ListRegistrationPeriodSerializer
+from escola.models import Student, Course, Registration
+from escola.serializer import StudentSerializer, CourseSerializer, RegistrationSerializer, ListRegistrationStudentsSerializer, ListaRegistrationsStudentsSerializer,ListCourseLevelsSerializer,ListRegistrationPeriodSerializer
 from rest_framework.authentication import BasicAuthentication
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 
-class AlunosViewSet(viewsets.ModelViewSet):
+class StudentsViewSet(viewsets.ModelViewSet):
     '''Exibindo alunos e alunas'''
-    queryset = Aluno.objects.all()
-    serializer_class = AlunoSerializer
+    queryset = Student.objects.all()
+    serializer_class = StudentSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['nome']
+    search_fields = ['name']
     # authentication_classes = [BasicAuthentication]
     # permission_classes = [IsAuthenticated]
 
 
-class CursosViewSet(viewsets.ModelViewSet):
+class CoursesViewSet(viewsets.ModelViewSet):
     '''Exibindo todos os curso'''
-    queryset = Curso.objects.all()
-    serializer_class = CursoSerializer
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
     filter_backends = [filters.SearchFilter]
-    search_fields = ['descricao']
+    search_fields = ['description']
     
     
     # authentication_classes = [BasicAuthentication]
     # permission_classes = [IsAuthenticated]
 
 
-class MatriculasViewSet(viewsets.ModelViewSet):
+class RegistrationsViewSet(viewsets.ModelViewSet):
     '''Listando todas as matriculas'''
-    serializer_class = MatriculaSerializer
+    serializer_class = RegistrationSerializer
     def get_queryset(self):
         search = self.request.query_params.get('search',"")
         
-        queryset = Matricula.objects.filter(aluno__nome__startswith=search)
+        queryset = Registration.objects.filter(student__name__startswith=search)
         return queryset
     # authentication_classes = [BasicAuthentication]
     # permission_classes = [IsAuthenticated]
 
 
-class ListaMatriculasAluno(generics.ListAPIView):
+class ListRegistrationsStudent(generics.ListAPIView):
     '''Listando as matriculas de um aluno(a)'''
 
     def get_queryset(self):
 
-        queryset = Matricula.objects.filter(aluno_id=self.kwargs['pk'])
+        queryset = Registration.objects.filter(student_id=self.kwargs['pk'])
         print(queryset)
         return queryset
-    serializer_class = ListaMatriculasAlunoSerializer
+    serializer_class = ListRegistrationStudentsSerializer
     # authentication_classes = [BasicAuthentication]
     # permission_classes = [IsAuthenticated]
 
 
-class ListaAlunosMatriculados(generics.ListAPIView):
+class ListStudentRegistrations(generics.ListAPIView):
     '''Listando alunos matriculados em um curso'''
 
     def get_queryset(self):
-        queryset = Matricula.objects.filter(curso_id=self.kwargs['pk'])
+        queryset = Registration.objects.filter(course_id=self.kwargs['pk'])
         return queryset
-    serializer_class = ListaAlunosMatriculadosSerializer
+    serializer_class = ListaRegistrationsStudentsSerializer
     # authentication_classes = [BasicAuthentication]
     # permission_classes = [IsAuthenticated]
 
@@ -69,20 +69,20 @@ class ListaAlunosMatriculados(generics.ListAPIView):
 class ListCourseLevels(views.APIView):
     
     def get(self,request):
-        NIVEL = [
-        {"value":'B',"option": 'BÁSICO'},
+        LEVEL = [
+        {"value":'B',"option": 'Básico'},
         {"value":'I',"option": 'Intermediário'},
         {"value":'A',"option": 'Avançado'}]
-        results = ListCourseLevelsSerializer(NIVEL, many=True).data
+        results = ListCourseLevelsSerializer(LEVEL, many=True).data
         return Response(results)
     
 class ListRegistrationPeriod(views.APIView):
     def get(self,request):
-        PERIODO = [
+        PERIOD = [
                 {"value":'M',"option": 'Matutino'},
                 {"value":'V',"option": 'Vespertino'},
                 {"value":'N',"option": 'Noturno'}]
-        results = ListRegistrationPeriodSerializer(PERIODO, many=True).data
+        results = ListRegistrationPeriodSerializer(PERIOD, many=True).data
         return Response(results)
     
     
