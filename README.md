@@ -25,6 +25,11 @@ Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Django 
 pip install django-cors-headers
 ```
 
+Use the package manager [pip](https://pip.pypa.io/en/stable/) to install Django corsheaders.
+```bash
+pip install djangorestframework-simplejwt
+```
+
 
 ## Clone and Run
 
